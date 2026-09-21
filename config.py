@@ -44,7 +44,7 @@ MQTT_USERNAME = ""
 MQTT_PASSWORD = ""
 
 # Topic som används enligt uppgiften
-MQTT_LIGHT_TOPIC = ""
+MQTT_LED_TOPIC = ""
 
 # Topic för temperaturlarmet
 MQTT_ALARM_TOPIC = ""

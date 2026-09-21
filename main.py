@@ -80,10 +80,10 @@ def on_connect(client, userdata, flags, reason_code, properties):
     """Called automatically when connected to the MQTT broker."""
     if reason_code == 0:
         print("Ansluten till MQTT-broker!")
-        client.subscribe(config.MQTT_LIGHT_TOPIC)
+        client.subscribe(config.MQTT_LED_TOPIC)
         client.subscribe(config.MQTT_ALARM_TOPIC)
         print("Prenumerar på:")
-        print(" -", config.MQTT_LIGHT_TOPIC)
+        print(" -", config.MQTT_LED_TOPIC)
         print(" -", config.MQTT_ALARM_TOPIC)
     else:
         print("Kunde inte ansluta till MQTT.")
@@ -97,7 +97,7 @@ def on_message(client, userdata, message):
     print("MQTT:", topic, "->", data)
 
     # ---- Normal LED message (0-3) ----
-    if topic == config.MQTT_LIGHT_TOPIC:
+    if topic == config.MQTT_LED_TOPIC:
         if data in ("0", "1", "2", "3"):
             # Only update LEDs if no alarm is active
             if not alarm_active:
@@ -204,7 +204,7 @@ def publish_button_status():
 
     global last_button_value
     if value != last_button_value:
-        client.publish(config.MQTT_LIGHT_TOPIC, value)
+        client.publish(config.MQTT_LED_TOPIC, value)
         last_button_value = value
         print(msg)
 
